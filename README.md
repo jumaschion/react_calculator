@@ -1,6 +1,6 @@
 # Calculator project
 
-
+![Twitter](https://img.shields.io/twitter/url/https/twitter.com/xjulices.svg?style=social)
 
 ## Installation
 
