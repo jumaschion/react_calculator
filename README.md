@@ -1,3 +1,5 @@
-#### Calculator project
+                ### Calculator project
 
-![Calculator image](./calculator/src/img/calculator_image.png)
+
+
+![Calculator image](/calculator/src/img/calculator_img.png)
