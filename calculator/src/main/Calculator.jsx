@@ -10,38 +10,48 @@ const initialState = {
   clearDisplay: false,
   operation: null,
   values: [0, 0],
-  current: 0
+  currentIndexValues: 0
 };
 
 export default class Calculator extends Component {
+  
   state = { ...initialState };
 
   clearMemory() {
-    this.setState({ ...this.initialState });
+    this.setState({ ...initialState });
   }
 
   setOperation(operation) {
-    
-    if (this.state.current === 0) {
-        this.setState({operation, current: 1, clearDisplay: true})
-    } else {
-      const equals = operation === "="
-      const currentOperation = this.state.operation
+      const isEquals = operation === "="
+      let newDisplayValue = this.state.displayValue
+      console.log('newDisplayValue', newDisplayValue);
 
-      const values = [...this.state.values]
+      const lastCharDisplayValue =  newDisplayValue[newDisplayValue.length - 1];
+      if(isNaN(lastCharDisplayValue) && !isEquals) {
+        const newDisplayValueLength = newDisplayValue.length - 1;
+        newDisplayValue = newDisplayValue.substr(0, newDisplayValueLength)
+      }
 
-      values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`)
-      values[1] = 0
-
-      this.setState({
-        displayValue: values[0],
-        operation: equals ? null : operation,
-        current: equals ? 0 : 1,
-        clearDisplay: !equals,
-        values
-      })
+      if (isEquals) {
+        // Calcular resultado
+        let result;
+        try {
+          result = eval(`${newDisplayValue}`);
+          this.setState({
+            displayValue: result
+          })
+        } catch (error) {
+          this.clearMemory();
+        } 
+      } else {
+        // Mostrar operador no display
+        const showOperation = `${newDisplayValue}${operation}`
+        this.setState({
+          displayValue: showOperation
+        })
+      }
     }
-  }
+  
 
   addDigit(n) {
 
@@ -56,7 +66,7 @@ export default class Calculator extends Component {
     this.setState({ displayValue, clearDisplay: false })
 
     if(n !== '.'){
-      const i = this.state.current
+      const i = this.state.currentIndexValues
       const newValue = parseFloat(displayValue)
       const values = [this.state.values]
       values[i] = newValue
