@@ -1,8 +1,8 @@
-# Calculator project
+# Calculator project from Udemy
 
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/jumaschion/react_calculator.svg?style=social)](https://twitter.com/xjulices)
 
-## Installation
+## Installation :D
 
 ```bash
 cd calculator
